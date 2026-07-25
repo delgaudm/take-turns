@@ -2,13 +2,16 @@
 
 Offline multiplayer games for face-to-face fun. No accounts, ads, tracking, or analytics.
 
+See [Design Philosophy](DESIGN_PHILOSOPHY.md) for the principles and constraints
+shared by every game in the collection.
+
 ## Play
 
 **[Open the game launcher](https://taketurns.fun/)**
 
 [![Take Turns launcher](screenshots/launcher.jpg)](https://taketurns.fun/)
 
-Choose a game and start playing. On a phone, use **Install App** or **Add to Home Screen** from the browser menu. Visit the launcher once while online and all nine games are cached for later use without a connection.
+Choose a game and start playing. On a phone, use **Install App** or **Add to Home Screen** from the browser menu. Visit the launcher once while online and all ten games are cached for later use without a connection.
 
 The games are ordinary web pages, so there is nothing to buy and no app-store account is required. Clearing browser storage can remove the offline copy; reconnecting and opening the launcher restores it.
 
@@ -70,9 +73,17 @@ The games are ordinary web pages, so there is nothing to buy and no app-store ac
       <p>Give examples until your teammate names the category. Includes 500 phrases, timed team turns, and automatic tie rounds.</p>
     </td>
     <td width="50%">
+      <h3><a href="codeword/codeword.html">Codeword</a></h3>
+      <a href="codeword/codeword.html"><img src="screenshots/codeword.png" alt="Codeword gameplay" width="520"></a>
+      <p>Give up to five one-word clues while the whole room races to decode the answer. Includes 799 codewords and a daily no-repeat deck.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
       <h3>Private by design</h3>
       <p>Every game runs entirely on the device. Saved cards, scores, seen-card history, and Case Law remain in that browser. Nothing is sent to a server.</p>
     </td>
+    <td width="50%"></td>
   </tr>
 </table>
 

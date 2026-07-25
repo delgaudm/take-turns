@@ -1,4 +1,4 @@
-const CACHE_NAME="take-turns-v4";
+const CACHE_NAME="take-turns-v7";
 const ASSETS=[
   "./",
   "./index.html",
@@ -15,6 +15,7 @@ const ASSETS=[
   "./talk-amongst-yourselves/talk-amongst-yourselves.html",
   "./would-you-rather/would-you-rather.html",
   "./name-the-list/name-the-list.html",
+  "./codeword/codeword.html",
   "./screenshots/launcher.jpg",
   "./screenshots/launcher-mobile.jpg",
   "./screenshots/word-shaker.jpg",
@@ -25,7 +26,8 @@ const ASSETS=[
   "./screenshots/petty-court.jpg",
   "./screenshots/talk-amongst-yourselves.jpg",
   "./screenshots/would-you-rather.jpg",
-  "./screenshots/name-the-list.jpg"
+  "./screenshots/name-the-list.jpg",
+  "./screenshots/codeword.png"
 ];
 
 self.addEventListener("install",event=>{

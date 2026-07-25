@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17191c">
+<meta name="description" content="Give one-word clues and race to guess the codeword.">
+<title>Codeword</title>
+<style>
+  :root{--night:#17191c;--night-hi:#282c31;--panel:#22262b;--line:#454a50;--paper:#f3ecdc;--ink:#272119;--muted:#999891;--gold:#ddb555;--gold-dark:#896a27;--teal:#68bcb6;--teal-dark:#267a75;--coral:#df715f;--coral-dark:#8f3b32}
+  *{box-sizing:border-box;margin:0;padding:0}html{min-height:100%;background:var(--night)}body{min-height:100vh;background:radial-gradient(100% 68% at 50% 0%,var(--night-hi),var(--night) 72%);color:var(--paper);font-family:ui-sans-serif,"Helvetica Neue",Arial,sans-serif;display:flex;flex-direction:column;align-items:center;padding:17px 18px 24px;gap:16px}button{font:inherit;cursor:pointer}[hidden]{display:none!important}button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  .appHeader{width:min(760px,100%);display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:11px}.brandMark{width:43px;height:43px;border:2px solid var(--teal);border-radius:7px;display:grid;place-items:center;color:var(--teal)}.brandMark svg{width:24px;height:24px}.brandText strong{display:block;font-family:Georgia,"Times New Roman",serif;font-size:23px;line-height:1;letter-spacing:0}.brandText span{display:block;margin-top:5px;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}.toolButton{height:40px;min-width:40px;border:1px solid #575c62;border-radius:999px;background:transparent;color:#bbb7ae;display:grid;place-items:center;padding:0 12px;font-size:10px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+  main{width:min(760px,100%);display:grid;gap:17px}.screen{display:none}.screen.on{display:grid;gap:17px}.eyebrow{color:var(--teal);font-size:9px;font-weight:900;letter-spacing:.22em;text-transform:uppercase}.hero{text-align:center;display:grid;gap:12px;padding:28px 12px 8px}.hero h1{font-family:Georgia,"Times New Roman",serif;font-size:42px;line-height:1.08;letter-spacing:0}.hero p{max-width:590px;margin:auto;color:#b2aea5;font-size:15px;line-height:1.58}.howItFlows{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;display:grid;grid-template-columns:repeat(3,1fr);gap:11px}.flowStep{text-align:center;padding:7px 12px;color:#a9a69f;font-size:12px;line-height:1.45}.flowStep strong{display:block;margin-bottom:6px;color:var(--gold);font:900 18px ui-monospace,Menlo,monospace}.flowStep span{color:var(--paper);font-weight:800}.btn{min-height:46px;border:0;border-radius:999px;padding:12px 21px;background:var(--gold);color:#211a0e;font-size:10px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;box-shadow:0 4px 0 var(--gold-dark)}.btn:active{transform:translateY(2px);box-shadow:0 2px 0 var(--gold-dark)}.btn.primary{justify-self:center;min-width:260px}.btn.teal{background:var(--teal);box-shadow:0 4px 0 var(--teal-dark);color:#102422}.btn.coral{background:var(--coral);box-shadow:0 4px 0 var(--coral-dark);color:#2c1411}.btn.quiet{border:1px solid #575c62;background:transparent;color:#b7b3aa;box-shadow:none}.btn.quiet:active{transform:none}
+  .roundMeta{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#7f8285;font-size:9px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}.roundMeta strong{color:var(--teal)}.codeCard{min-height:380px;border:1px solid #665d49;border-radius:9px;background:var(--paper);color:var(--ink);padding:45px 30px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:inset 0 -13px 24px rgba(97,74,41,.14),0 24px 52px rgba(0,0,0,.42);position:relative;overflow:hidden}.codeCard:before{content:"";position:absolute;inset:16px;border:1px solid rgba(83,61,34,.16);border-radius:5px;pointer-events:none}.cardKicker{position:absolute;top:34px;color:#806f55;font-size:9px;font-weight:900;letter-spacing:.22em;text-transform:uppercase}.codeword{max-width:680px;font-family:Georgia,"Times New Roman",serif;font-size:52px;line-height:1.08;letter-spacing:-.01em;text-wrap:balance}.clueInstruction{margin-top:27px;color:#735a33;font-size:13px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.timerRow{margin-top:29px;display:flex;align-items:center;justify-content:center;gap:13px}.clock{font:900 29px ui-monospace,Menlo,monospace;color:#332b21}.pointBadge{border-radius:999px;background:var(--teal);color:#12302d;padding:8px 12px;font-size:10px;font-weight:950;letter-spacing:.12em;text-transform:uppercase}.pointBadge.two{background:var(--gold);color:#33260f}.pointBadge.one{background:var(--coral);color:#371713}.progress{position:absolute;left:0;right:0;bottom:0;height:8px;background:#cfc4ad}.progressBar{height:100%;width:100%;background:var(--teal);transform-origin:left}.progressBar.two{background:var(--gold)}.progressBar.one{background:var(--coral)}
+  .playActions{display:grid;grid-template-columns:1fr 1fr;gap:12px}.playActions .btn{min-height:60px;border-radius:8px;font-size:12px}.ruleLine{text-align:center;color:#74777a;font-size:10px;line-height:1.45}.resultPanel{text-align:center;display:grid;gap:16px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:43px 16px}.resultIcon{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;margin:auto;background:rgba(104,188,182,.12);color:var(--teal);font-size:29px;font-weight:900}.resultPanel.missed .resultIcon{background:rgba(223,113,95,.12);color:var(--coral)}.resultPanel h1{font-family:Georgia,"Times New Roman",serif;font-size:37px;line-height:1.12}.resultWord{color:var(--gold);font-size:12px;font-weight:900;letter-spacing:.15em;text-transform:uppercase}.resultMessage{max-width:520px;margin:auto;color:#aaa69e;font-size:14px;line-height:1.55}.resultPoints{color:var(--teal);font:900 22px ui-monospace,Menlo,monospace}.resultPanel.missed .resultPoints{color:#8e8d89}
+  .modal{position:fixed;inset:0;z-index:20;background:rgba(7,8,9,.88);display:flex;align-items:center;justify-content:center;padding:18px}.modalCard{width:min(590px,100%);max-height:88vh;overflow:auto;border:1px solid #595e64;border-radius:8px;background:#25292e;padding:24px;color:#d2ccc0;box-shadow:0 30px 70px rgba(0,0,0,.7)}.modalHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.modalHead h2{font-family:Georgia,"Times New Roman",serif;color:var(--paper);font-size:24px;letter-spacing:0}.rulesList{padding-left:20px;display:grid;gap:11px;font-size:14px;line-height:1.5}.rulesList strong{color:var(--gold)}.privacy{margin-top:16px;color:#92908a;font-size:12px;line-height:1.45}.privacy strong{color:var(--teal)}footer{margin-top:auto;text-align:center;color:#63676b;font-size:9px;letter-spacing:.11em;text-transform:uppercase;line-height:1.5}
+  @media(max-width:620px){body{padding:13px 12px 19px;gap:13px}.brandText strong{font-size:19px}.brandText span{display:none}.brandMark{width:38px;height:38px}.hero{padding-top:21px}.hero h1{font-size:33px}.hero p{font-size:14px}.howItFlows{grid-template-columns:1fr;padding:12px 0;gap:0}.flowStep{display:grid;grid-template-columns:35px 1fr;align-items:center;text-align:left;padding:8px 13px}.flowStep strong{margin:0}.codeCard{min-height:365px;padding:50px 19px 34px}.codeword{font-size:39px}.clueInstruction{font-size:11px}.timerRow{margin-top:25px}.playActions .btn{min-height:58px}.resultPanel{padding:38px 12px}.resultPanel h1{font-size:31px}.modalCard{padding:20px 17px}}
+  @media(max-width:360px){.codeCard{min-height:340px}.codeword{font-size:34px}.timerRow{gap:9px}.clock{font-size:25px}.pointBadge{font-size:9px;padding:7px 9px}.playActions{gap:8px}.playActions .btn{padding:10px 8px}}
+</style>
+</head>
+<body>
+<header class="appHeader">
+  <div class="brand">
+    <span class="brandMark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M4 12h16M10 17h10"/><circle cx="17" cy="7" r="2"/><circle cx="7" cy="17" r="2"/></svg></span>
+    <span class="brandText"><strong>Codeword</strong><span>One word at a time</span></span>
+  </div>
+  <button id="helpBtn" class="toolButton" aria-label="How to play" aria-haspopup="dialog">?</button>
+</header>
+
+<main>
+  <section id="welcomeScreen" class="screen on">
+    <div class="hero"><span class="eyebrow">A clue game for the whole room</span><h1>Say less. Guess fast.</h1><p>One person sees the codeword and gives a one-word clue. The first person to guess it becomes the next giver.</p></div>
+    <div class="howItFlows">
+      <div class="flowStep"><strong>5</strong><span>one-word clues at most</span></div>
+      <div class="flowStep"><strong>90</strong><span>seconds to decode it</span></div>
+      <div class="flowStep"><strong>5–1</strong><span>points as clues are added</span></div>
+    </div>
+    <button id="startGame" class="btn primary teal">Reveal first codeword</button>
+    <p class="ruleLine">Clues must be one real word. No forms of the codeword, gestures, spelling, or rhymes.</p>
+  </section>
+
+  <section id="playScreen" class="screen">
+    <div class="roundMeta"><span id="cardCount">Codeword 1</span><span><strong id="clueCount">Clue 1 of 5</strong></span></div>
+    <article class="codeCard" aria-live="polite">
+      <span class="cardKicker">The codeword is</span>
+      <h1 id="codeword" class="codeword"></h1>
+      <p id="clueInstruction" class="clueInstruction">Give a one-word clue.</p>
+      <div class="timerRow"><span id="clock" class="clock">1:30</span><span id="pointBadge" class="pointBadge">3 points</span></div>
+      <div class="progress" aria-hidden="true"><div id="progressBar" class="progressBar"></div></div>
+    </article>
+    <div class="playActions"><button id="gotIt" class="btn teal">Got it</button><button id="discard" class="btn coral">Discard</button></div>
+    <p class="ruleLine">Guesses are unlimited. Wait for each chime before giving another clue.</p>
+  </section>
+
+  <section id="resultScreen" class="screen">
+    <div id="resultPanel" class="resultPanel">
+      <div id="resultIcon" class="resultIcon" aria-hidden="true">✓</div>
+      <span id="resultLabel" class="eyebrow">Codeword decoded</span>
+      <h1 id="resultTitle">Hand over the phone.</h1>
+      <p id="resultWord" class="resultWord"></p>
+      <p id="resultMessage" class="resultMessage"></p>
+      <p id="resultPoints" class="resultPoints"></p>
+    </div>
+    <button id="nextWord" class="btn primary teal">Reveal next codeword</button>
+  </section>
+</main>
+
+<div id="rulesModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="rulesTitle" hidden>
+  <div class="modalCard">
+    <div class="modalHead"><h2 id="rulesTitle">How to Play</h2><button id="closeRules" class="btn quiet">Close</button></div>
+    <ol class="rulesList">
+      <li>One person is the giver. Tap <strong>Reveal codeword</strong>, keep the screen private, and give one single-word clue.</li>
+      <li><strong>Clues must be one real word.</strong> You may use vocal inflection or facial expressions, but no gestures, hand motions, or pointing.</li>
+      <li><strong>No forms of the codeword.</strong> A clue cannot contain any part, root, or variation of it. For example, "win" is not allowed for <strong>WINNER</strong>.</li>
+      <li><strong>An illegal clue ends the card.</strong> Tap Discard, award no points, and pass the phone clockwise.</li>
+      <li>Everyone else guesses aloud. Guesses are unlimited.</li>
+      <li>A chime every 18 seconds allows another clue, up to five clues total.</li>
+      <li>The first correct guess is worth 5, 4, 3, 2, or 1 point. Keep score yourselves if you want to.</li>
+      <li>The first person to guess correctly becomes the next giver. If nobody gets it, reveal the answer and pass the phone clockwise.</li>
+      <li>Clues also cannot spell the codeword, give its first letter, or say what it rhymes with.</li>
+    </ol>
+    <p class="privacy"><strong>Private by design:</strong> the deck runs fully offline. This browser remembers today's codewords so they do not repeat.</p>
+  </div>
+</div>
+
+<footer><span id="deckCount"></span> codewords &middot; fully offline &middot; no accounts, tracking, or analytics</footer>
+
+<script>
+(function(){
+"use strict";
+const WORD_GROUPS={
+animals:`alligator|alpaca|antelope|armadillo|baboon|badger|bat|beaver|bee|beetle|bison|bluebird|butterfly|camel|canary|cardinal|catfish|caterpillar|cheetah|chicken|chimpanzee|chipmunk|cobra|cockroach|cow|coyote|crab|cricket|crocodile|crow|deer|dinosaur|dolphin|donkey|dragonfly|duck|eagle|eel|elephant|falcon|firefly|flamingo|fly|fox|frog|gazelle|giraffe|goat|goldfish|goose|gorilla|grasshopper|hamster|hawk|hedgehog|hippopotamus|honeybee|horse|hummingbird|hyena|jellyfish|kangaroo|koala|ladybug|lamb|leopard|lion|lizard|lobster|meerkat|monkey|moose|mosquito|moth|mouse|octopus|ostrich|otter|owl|oyster|panda|panther|parrot|peacock|pelican|penguin|pig|pigeon|polar bear|porcupine|puppy|rabbit|raccoon|raven|rhinoceros|rooster|seahorse|seal|shark|sheep|skunk|sloth|snail|snake|spider|squid|squirrel|starfish|stingray|swan|tadpole|tiger|toad|tortoise|toucan|turkey|turtle|walrus|wasp|whale|wolf|woodpecker|zebra`,
+food:`apple pie|avocado|bacon|bagel|banana|barbecue|birthday cake|biscuit|blueberry|brownie|burrito|butter|cabbage|candy cane|caramel|carrot|cereal|cheeseburger|cheesecake|cherry|chicken nugget|chili|chocolate|cinnamon|coconut|cookie|cornbread|cotton candy|cupcake|doughnut|dumpling|eggplant|french fries|fried chicken|fudge|garlic|gingerbread|grapefruit|gravy|green bean|hamburger|hot dog|ice cream|jellybean|ketchup|lemonade|licorice|lollipop|macaroni|marshmallow|mashed potatoes|meatball|milkshake|muffin|mushroom|mustard|nachos|noodles|oatmeal|olive|omelet|onion ring|orange|pancake|peanut butter|pepperoni|pickle|pineapple|pizza|popcorn|popsicle|potato chip|pretzel|pumpkin pie|quesadilla|raspberry|rice pudding|salad|sandwich|sausage|scrambled eggs|smoothie|spaghetti|strawberry|sushi|taco|toast|tomato|tortilla|tuna fish|turkey sandwich|vanilla|waffle|watermelon|whipped cream|yogurt`,
+home:`air conditioner|alarm clock|armchair|attic|back door|backyard|balcony|basement|bathtub|bedroom|blanket|bookshelf|broom|bucket|bunk bed|carpet|ceiling fan|closet|coffee table|couch|curtain|dishwasher|doorbell|doormat|dresser|driveway|dryer|dustpan|fireplace|flowerpot|freezer|front porch|frying pan|garage|garbage can|garden hose|guest room|hallway|hammock|hanger|high chair|kettle|kitchen sink|laundry basket|lawn mower|light bulb|mailbox|medicine cabinet|microwave|mirror|mop|nightlight|oven|pillow|plunger|recliner|refrigerator|remote control|rocking chair|roof|shower curtain|sleeping bag|smoke alarm|soap dish|sofa|staircase|stove|tablecloth|thermostat|toaster|toilet paper|toolbox|towel|vacuum cleaner|washing machine|welcome mat|window screen|wine glass`,
+objects:`accordion|anchor|backpack|balloon|bandage|basket|battery|binoculars|boomerang|bowling ball|briefcase|bubble wrap|button|camera|candle|cane|cash register|chainsaw|clothespin|compass|crayon|crowbar|dice|drum|envelope|eraser|extension cord|fire extinguisher|flashlight|flyswatter|fountain pen|gift wrap|globe|glue stick|guitar|hammer|handcuffs|harmonica|hourglass|keychain|kite|ladder|lantern|magnifying glass|matchstick|megaphone|microphone|newspaper|paintbrush|paper clip|pencil sharpener|piggy bank|pinwheel|pocketknife|postcard|puzzle piece|rubber band|ruler|scissors|shopping cart|snow globe|stapler|stopwatch|suitcase|sunglasses|tape measure|teapot|telephone|telescope|thermometer|thumbtack|toothpick|traffic cone|typewriter|umbrella|wallet|watering can|wheelbarrow|whistle|yo-yo`,
+places:`amusement park|aquarium|art gallery|airport|bakery|bank|barbershop|baseball stadium|beach|bookstore|bowling alley|bus station|campground|castle|cemetery|circus|city hall|classroom|coffee shop|college|courthouse|daycare|dentist office|desert island|diner|farm|fire station|flea market|flower shop|forest|gas station|grocery store|gymnasium|hardware store|hospital|hotel|ice rink|jail|jungle|laundromat|library|lighthouse|movie theater|museum|office|opera house|parking garage|pet store|pharmacy|picnic area|playground|police station|post office|restaurant|school cafeteria|shopping mall|skate park|ski lodge|space station|swimming pool|train station|tree house|veterinary clinic|volcano|warehouse|water park|zoo`,
+people:`actor|artist|astronaut|babysitter|baker|barber|baseball player|bus driver|butcher|carpenter|cashier|chef|coach|construction worker|cowboy|crossing guard|dancer|dentist|detective|doctor|drummer|electrician|farmer|firefighter|flight attendant|florist|gardener|judge|librarian|lifeguard|magician|mail carrier|mechanic|musician|nurse|painter|photographer|pilot|plumber|police officer|principal|referee|reporter|sailor|scientist|security guard|singer|teacher|tour guide|train conductor|truck driver|veterinarian|waiter|weather reporter|wedding planner`,
+activities:`baking|bird watching|bowling|camping|canoeing|car washing|cheerleading|chess|climbing|cooking|dancing|dog walking|fishing|gardening|golfing|hide-and-seek|hiking|horseback riding|ice fishing|ice skating|jogging|jumping rope|karaoke|kayaking|knitting|painting|parachuting|photography|playing catch|reading|roller skating|rowing|running|sailing|scuba diving|shopping|singing|skateboarding|skiing|sledding|snorkeling|snowboarding|stargazing|surfing|swimming|table tennis|tennis|treasure hunting|video gaming|walking|water skiing|weightlifting|wrestling|yoga`,
+nature:`avalanche|beach|blizzard|boulder|canyon|cave|cliff|cloud|coral reef|desert|earthquake|forest|geyser|glacier|hailstorm|hill|hurricane|iceberg|island|jungle|lake|lightning|meteor|moonlight|mountain|mudslide|ocean|palm tree|rainbow|raindrop|river|sand dune|snowflake|snowstorm|star|sunrise|sunset|thunder|tornado|valley|volcano|waterfall|wave|wildfire`,
+transport:`airplane|ambulance|bicycle|bulldozer|bus|cable car|canoe|caravan|cargo ship|convertible|cruise ship|dump truck|fire engine|forklift|garbage truck|golf cart|helicopter|hot-air balloon|ice cream truck|jeep|jet ski|limousine|motorcycle|police car|race car|rocket ship|rowboat|school bus|scooter|skateboard|snowmobile|spaceship|speedboat|submarine|taxi|tow truck|tractor|train|tricycle|unicycle|van|wagon|wheelchair|yacht`,
+clothing:`apron|baseball cap|bathrobe|belt|bow tie|bracelet|cowboy boots|crown|earmuffs|flip-flops|glove|graduation cap|handbag|helmet|high heels|hoodie|jacket|jeans|mittens|necklace|overalls|pajamas|raincoat|ring|sandals|scarf|slippers|sneakers|socks|sombrero|suit|sunglasses|sweater|swimsuit|top hat|tuxedo|uniform|wedding dress|winter coat`,
+school:`backpack|blackboard|book report|calculator|chalk|clipboard|crayon|desk|diploma|eraser|field trip|globe|graduation|gym class|highlighter|homework|lunchbox|marker|notebook|pencil|pencil case|principal|recess|report card|ruler|school bell|school bus|science fair|stapler|student|substitute teacher|textbook|whiteboard`,
+celebrations:`anniversary|baby shower|birthday|birthday candle|birthday present|confetti|costume party|fireworks|gift bag|graduation|holiday dinner|invitation|jack-o-lantern|new year|party hat|parade|piñata|retirement party|sparkler|surprise party|thank-you card|wedding|wedding cake`,
+sports:`archery|badminton|baseball|basketball|baton|boxing|catcher|cheerleader|diving board|football|goalkeeper|golf|gymnastics|hockey|home run|karate|marathon|medal|pitcher|race track|referee|scoreboard|skateboard|skiing|soccer|softball|surfboard|swimming|tennis|trophy|volleyball|wrestling`,
+music:`accordion|bagpipes|banjo|choir|clarinet|concert|drum|flute|guitar|harmonica|harp|headphones|jazz|karaoke|microphone|orchestra|piano|radio|saxophone|sheet music|speaker|tambourine|trumpet|tuba|violin|whistle|xylophone`,
+everyday:`appointment|bubble bath|bus stop|car wash|daydream|elevator|family photo|first aid|garage sale|grocery list|haircut|handshake|junk drawer|lost and found|lunch break|nap|neighborhood|password|phone call|picnic|rainy day|road trip|rush hour|seat belt|shopping list|snow day|traffic jam|vacation|waiting room|weekend|yard sale`
+};
+
+const $=id=>document.getElementById(id);
+const deck=Array.from(new Map(Object.entries(WORD_GROUPS).flatMap(([category,words])=>words.split("|").map(word=>[word,{id:word.replace(/[^a-z0-9]+/g,"-"),category,word:word.toUpperCase()}]))).values());
+const SCREENS=["welcomeScreen","playScreen","resultScreen"],SEEN_KEY="codewordDailySeenV1",ROUND_MS=90000,CLUE_MS=18000;
+let current=null,round=0,endAt=0,timerId=null,lastPhase=5,audioCtx=null,wakeLock=null;
+
+function localDay(){const now=new Date();return now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");}
+function readSeen(){try{const saved=JSON.parse(localStorage.getItem(SEEN_KEY));return saved&&saved.date===localDay()&&Array.isArray(saved.ids)?new Set(saved.ids):new Set();}catch(error){return new Set();}}
+function writeSeen(seen){try{localStorage.setItem(SEEN_KEY,JSON.stringify({date:localDay(),ids:Array.from(seen)}));}catch(error){}}
+function showScreen(id){SCREENS.forEach(name=>$(name).classList.toggle("on",name===id));window.scrollTo(0,0);}
+function chooseWord(){
+  let seen=readSeen(),available=deck.filter(item=>!seen.has(item.id));
+  if(!available.length){seen=new Set();available=deck.slice();}
+  const categoryPool=Array.from(new Set(available.filter(item=>!current||item.category!==current.category).map(item=>item.category)));
+  const category=categoryPool.length?categoryPool[(Math.random()*categoryPool.length)|0]:available[0].category;
+  const candidates=available.filter(item=>item.category===category);
+  current=candidates[(Math.random()*candidates.length)|0];seen.add(current.id);writeSeen(seen);
+}
+function format(ms){const seconds=Math.max(0,Math.ceil(ms/1000)),minutes=(seconds/60)|0;return minutes+":"+String(seconds%60).padStart(2,"0");}
+function unlockAudio(){if(!audioCtx){try{audioCtx=new (window.AudioContext||window.webkitAudioContext)();}catch(error){}}}
+function chime(phase){
+  if(!audioCtx)return;
+  const now=audioCtx.currentTime,frequencies=phase>1?[660,880]:[523,659,784];
+  frequencies.forEach((frequency,index)=>{const oscillator=audioCtx.createOscillator(),gain=audioCtx.createGain();oscillator.frequency.value=frequency;gain.gain.setValueAtTime(.0001,now+index*.1);gain.gain.exponentialRampToValueAtTime(.18,now+index*.1+.015);gain.gain.exponentialRampToValueAtTime(.0001,now+index*.1+.17);oscillator.connect(gain).connect(audioCtx.destination);oscillator.start(now+index*.1);oscillator.stop(now+index*.1+.19);});
+}
+async function holdScreen(){try{if("wakeLock" in navigator)wakeLock=await navigator.wakeLock.request("screen");}catch(error){wakeLock=null;}}
+function releaseScreen(){if(wakeLock){wakeLock.release().catch(()=>{});wakeLock=null;}}
+function renderTimer(remaining){
+  const phase=Math.max(1,Math.ceil(remaining/CLUE_MS)),progress=Math.max(0,remaining/ROUND_MS);
+  $("clock").textContent=format(remaining);$("pointBadge").textContent=phase+" "+(phase===1?"point":"points");
+  $("pointBadge").className="pointBadge "+(phase>=4?"":phase>=2?"two":"one");
+  $("progressBar").className="progressBar "+(phase>=4?"":phase>=2?"two":"one");$("progressBar").style.transform="scaleX("+progress+")";
+  $("clueCount").textContent="Clue "+(6-phase)+" of 5";$("clueInstruction").textContent=phase===5?"Give a one-word clue.":"Give another one-word clue.";
+  if(phase!==lastPhase){lastPhase=phase;chime(phase);}
+}
+function tick(){
+  const remaining=endAt-Date.now();
+  if(remaining<=0){renderTimer(0);finish(false,"timeout");return;}
+  renderTimer(remaining);
+}
+function startRound(){
+  unlockAudio();chooseWord();round++;$("cardCount").textContent="Codeword "+round;$("codeword").textContent=current.word;
+  lastPhase=5;endAt=Date.now()+ROUND_MS;renderTimer(ROUND_MS);showScreen("playScreen");holdScreen();
+  clearInterval(timerId);timerId=setInterval(tick,200);
+}
+function finish(success,reason){
+  clearInterval(timerId);timerId=null;releaseScreen();
+  const remaining=Math.max(0,endAt-Date.now()),points=remaining>0?Math.max(1,Math.ceil(remaining/CLUE_MS)):0;
+  $("resultWord").textContent="The codeword was "+current.word;
+  $("resultPanel").classList.toggle("missed",!success);$("resultIcon").textContent=success?"✓":"×";
+  $("resultLabel").textContent=success?"Codeword decoded":reason==="discard"?"Codeword discarded":"Time is up";
+  $("resultTitle").textContent=success?"Hand over the phone.":"Pass the phone clockwise.";
+  $("resultMessage").textContent=success?"The first person who guessed it becomes the next giver.":"A new giver gets a fresh codeword.";
+  $("resultPoints").textContent=success?points+" "+(points===1?"point":"points"):"No points";
+  showScreen("resultScreen");
+}
+
+$("startGame").addEventListener("click",startRound);$("nextWord").addEventListener("click",startRound);
+$("gotIt").addEventListener("click",()=>finish(true,"correct"));$("discard").addEventListener("click",()=>finish(false,"discard"));
+$("helpBtn").addEventListener("click",()=>{$("rulesModal").hidden=false;$("closeRules").focus();});
+$("closeRules").addEventListener("click",()=>{$("rulesModal").hidden=true;$("helpBtn").focus();});
+$("rulesModal").addEventListener("click",event=>{if(event.target===$("rulesModal")){$("rulesModal").hidden=true;$("helpBtn").focus();}});
+document.addEventListener("keydown",event=>{if(event.key==="Escape"&&!$("rulesModal").hidden){$("rulesModal").hidden=true;$("helpBtn").focus();}});
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&timerId){tick();holdScreen();}});
+$("deckCount").textContent=deck.length.toLocaleString();
+})();
+</script>
+</body>
+</html>
