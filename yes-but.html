@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17191c">
+<meta name="description" content="The compromises, tools, and promises behind Take Turns.">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>I Am a Hypocrite · Take Turns</title>
+<style>
+  :root{--night:#17191c;--night-hi:#272b30;--panel:#202327;--line:#43474d;--paper:#f3ecdc;--muted:#aaa59b;--gold:#ddb552;--teal:#68bbb6;--coral:#dd705e}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:var(--night)}
+  body{min-height:100vh;background:radial-gradient(100% 25% at 50% 0%,var(--night-hi),var(--night) 78%);color:var(--paper);font-family:ui-sans-serif,"Helvetica Neue",Arial,sans-serif}
+  a{color:var(--teal);text-underline-offset:3px}a:focus-visible{outline:3px solid var(--teal);outline-offset:4px}
+  .shell{width:min(820px,100%);margin:auto;padding:22px 22px 64px}
+  .brand{display:inline-flex;align-items:center;gap:10px;color:var(--paper);text-decoration:none}
+  .backArrow{color:var(--gold);font-size:20px;line-height:1}
+  .brandMark{width:42px;height:42px;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-family:Georgia,"Times New Roman",serif;font-size:18px;font-weight:700}
+  .brandText strong{display:block;font-family:Georgia,"Times New Roman",serif;font-size:22px;line-height:1}
+  .brandText span{display:block;margin-top:5px;color:#85878a;font-size:8px;font-weight:900;letter-spacing:.18em;text-transform:uppercase}
+  .hero{padding:76px 0 46px;border-bottom:1px solid var(--line)}
+  .eyebrow{color:var(--teal);font-size:9px;font-weight:900;letter-spacing:.2em;text-transform:uppercase}
+  h1{margin-top:15px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(46px,8vw,72px);line-height:1;letter-spacing:-.025em}
+  .dek{margin-top:22px;color:var(--gold);font:italic 22px/1.5 Georgia,"Times New Roman",serif}
+  main{display:grid}
+  section{padding:39px 0;border-bottom:1px solid var(--line)}
+  section h2{font-family:Georgia,"Times New Roman",serif;font-size:31px;line-height:1.12}
+  section h2::before{content:"";display:block;width:34px;height:4px;margin-bottom:14px;background:var(--coral)}
+  section p{max-width:700px;margin-top:15px;color:var(--muted);font-size:16px;line-height:1.72}
+  section p strong,section p em{color:var(--paper)}
+  blockquote{margin-top:20px;border-left:3px solid var(--gold);padding:4px 0 4px 17px;color:var(--paper);font:20px/1.5 Georgia,"Times New Roman",serif}
+  .promises{margin-top:21px;display:grid;gap:8px}
+  .promises li{list-style:none;border:1px solid var(--line);border-radius:7px;background:var(--panel);padding:13px 15px;color:#c9c2b6;font-size:15px;line-height:1.45}
+  .promises li::before{content:"✓";margin-right:9px;color:var(--teal);font-weight:900}
+  .closing{padding:53px 0 8px;text-align:center}
+  .closing p{color:var(--paper);font:clamp(26px,5vw,40px)/1.2 Georgia,"Times New Roman",serif}
+  .closing strong{display:block;margin-top:12px;color:var(--gold)}
+  .playButton{display:inline-flex;align-items:center;justify-content:center;margin-top:31px;border-radius:999px;padding:14px 23px;background:var(--gold);color:#211a0e;text-decoration:none;font-size:10px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;box-shadow:0 5px 0 #8d6d28}
+  .playButton:active{transform:translateY(3px);box-shadow:0 2px 0 #8d6d28}
+  footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);text-align:center;color:#74767a;font-size:9px;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
+  @media(max-width:620px){.shell{padding:15px 16px 42px}.brandText span{display:none}.brandText strong{font-size:19px}.brandMark{width:38px;height:38px}.hero{padding:54px 0 36px}section{padding:33px 0}section h2{font-size:27px}.playButton{width:100%}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header><a class="brand" href="why-this-exists.html" aria-label="Back to the Take Turns manifesto"><span class="backArrow" aria-hidden="true">←</span><span class="brandMark" aria-hidden="true">?</span><span class="brandText"><strong>Take Turns</strong><span>Yes, but…</span></span></a></header>
+
+  <div class="hero">
+    <span class="eyebrow">Yes, but…</span>
+    <h1>I am a hypocrite</h1>
+    <p class="dek">There. I said it before you had to. I recognize that I am.</p>
+  </div>
+
+  <main>
+    <section>
+      <p>I mean, Take Turns rails against surveillance platforms while being hosted on GitHub, a platform owned by Microsoft. I use an android phone to test the games.</p>
+      <p>GitHub Pages logs visitors’ IP addresses for security. I do not receive those logs, I cannot identify you, and I have deliberately added no analytics or tracking of my own—but saying this site exists entirely outside the machinery would be a lie. <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection">GitHub documents that Pages logs visitor IP addresses</a>. Github itself tracks <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement#from-you">all sorts of stuff </a>to make you and me the product, just by using it. And android phones? Forget it.</p>
+      <p>The code is publicly readable on GitHub. And, yes, it’s vibe coded.</p>
+      <p>I, uh, “built” the games with the help of an AI tool, and from inspiration of other games that I found, or were ideas that people created before me.</p>
+      <p>I did not hire a developer, game designer, visual designer, copywriter, privacy consultant, accessibility specialist, or tiny focus group holding clipboards. That makes it sound like I replaced an entire creative team.</p>
+      <p>But in reality, I was never going to hire that team. I didn’t have a production budget awaiting responsible allocation. The alternative was not a beautifully staffed independent studio. The alternative was nothing. Nothing but a fleeting idea. I’m just a single dude trying to make a thing that helps me smile with friends.</p>
+      <p>In any case, Take Turns otherwise would have remained a tiny whiff of brain energy that disappeared while I was doing the dishes.</p>
+    </section>
+
+    <section>
+      <h2>That does not settle the argument</h2>
+      <p>And, i want to be clear. “It would not exist otherwise” is just an explanation. It ain’t a magic spell that makes every concern disappear. AI tools are built from enormous quantities of human work. They consume energy. They concentrate power in a small number of companies. They can flatten creative work into raw material and make it easier to treat skilled people as optional expenses.</p>
+      <p>I benefited from that system. If it helps, I tried to vibe code as much as I could from open source models running locally on my machine. But that local AI, for sure, did not generate <em>all</em> the code. I used the big labs when my local AI models couldn’t get the games where I wanted them to be.</p>
+      <p>But, I used it to make something free, private, portable, and deliberately hostile to the usual machinery of extraction. If I buy the paper I use to make protest signs from WalMart am I a hypocrite?</p>
+    </section>
+
+    <section>
+      <h2>Did AI take someone’s job?</h2>
+      <p>I don’t think so. I do not think an imaginary commission counts as a job saved or lost. No developer was dismissed from Take Turns. No designer had a contract canceled. No writer watched their assignment disappear into a prompt box. There was no funded project until these tools made one person capable of building it.</p>
+      <p>But that does not mean AI has no effect on creative work. It changes expectations. It changes budgets. It changes which skills people value and which labor becomes invisible.</p>
+      <p>I cannot honestly resolve that tension in my own favor. I can only tell you what happened here.AI did not replace the team behind Take Turns. AI was part of the team behind Take Turns.</p>
+    </section>
+
+    <section>
+      <h2>Purity is not available as a hosting plan</h2>
+      <p>Modern technology offers a remarkable variety of ways to compromise your principles.</p>
+      <p>The app needs infrastructure. The files need a host. The code needs tools. The device running the games was built through supply chains I cannot personally audit. Even telling people about the project will probably involve platforms whose business model I dislike.</p>
+      <p>There is no checkbox labeled:</p>
+      <blockquote>Deploy website without participating in capitalism, surveillance, environmental damage, monopoly power, or anyone being treated unfairly anywhere. See also <a href="https://en.wikipedia.org/wiki/Nirvana_fallacy">Nirvana Fallacy</a></blockquote>
+      <p>I checked. (Not really)</p>
+      <p>The absence of a perfectly clean option does not make every option equivalent. IF any of us tried to stay perfectly clean, We’d never be able to make anything. So I’ll try and do it as cleanly as I can, and fess up when I get a little dirty.</p>
+    </section>
+
+    <section>
+      <h2>What I can promise</h2>
+      <p>If I cannot promise purity, i’ll at least promise constraints.</p>
+      <ul class="promises">
+        <li>Take Turns will not add advertising.</li>
+        <li>It will not build behavioral profiles.</li>
+        <li>It will not require an account.</li>
+        <li>It will not sell, rent, trade, or “partner around” player data.</li>
+        <li>It will not introduce engagement tricks designed to keep people staring at it.</li>
+        <li>It will remain made of ordinary, portable web files that can leave GitHub.</li>
+        <li>It will disclose meaningful compromises instead of hiding them behind legal language.</li>
+        <li>AI assistance will not be passed off as an invisible room full of human employees.</li>
+        <li>The phone will remain a tool for the group, not the center of the experience.</li>
+      </ul>
+      <p>Those choices do not fix the technology industry, but hopefully they do make this tiny corner of it less awful. And your Thursday night a bit more fun.</p>
+      <p>My overriding goal was to help (starting with my own friends and family) create a way to play and have fun together without getting sucked into our phones, which was happening way too often. I wanted to try and find some small way for my phone to bring my friends together and have fun, rather than spend another hour doom-scrolling, or opening social media and saying “did you see this meme?”</p>
+    </section>
+
+    <section>
+      <h2>Better is not the same as innocent</h2>
+      <p>Maybe the goal is to know what the tools cost, refuse the worst incentives, create a little joy for strangers I’ll never meet, without charging admission or demanding proof that they enjoyed it, make what I “build” portable enough to leave the platforms if you want, and tell the truth about the rest.</p>
+      <p>Use imperfect tools to make less extractive things. Make things people can keep.</p>
+      <p>Collect less. Need less. And not let the impossibility of being perfectly ethical become an excuse to stop trying altogether.</p>
+    </section>
+
+    <section>
+      <h2>So, yes</h2>
+      <p>I am a hypocrite, or maybe I am implicated.</p>
+      <p>Either way, Take Turns exists. It is free. It does not know who you are. It asks for as little as I know how to ask.</p>
+      <p>Then it encourages you to look up from the screen, and smile and laugh with your family and friends.</p>
+    </section>
+  </main>
+
+  <div class="closing"><p>That is not a revolution.<strong>But, I hope, it is a turn in the right direction.</strong></p><a class="playButton" href="./">Go play. Take turns. Have fun.</a></div>
+  <footer>No accounts · no tracking · no ads · no analytics</footer>
+</div>
+</body>
+</html>
