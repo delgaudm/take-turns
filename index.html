@@ -34,6 +34,7 @@
   .btn{border:0;border-radius:999px;padding:11px 17px;background:var(--brass);color:#211b0e;font-size:10px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;display:inline-flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 4px 0 #8d6d28}
   .btn:active{transform:translateY(2px);box-shadow:0 2px 0 #8d6d28}.btn svg{width:15px;height:15px}
   .btn.quiet{background:transparent;color:#b1aca2;border:1px solid #55585e;box-shadow:none}.btn.quiet:active{transform:none}
+  .aboutInstall{padding-inline:13px}.aboutInstall .infoIcon{color:var(--teal);font-size:14px;line-height:1}
   .intro{padding:27px 0 20px;display:flex;align-items:end;justify-content:space-between;gap:24px}
   .intro h2{max-width:680px;font-family:Georgia,"Times New Roman",serif;font-size:34px;line-height:1.15;letter-spacing:0}
   .intro p{max-width:420px;color:#aaa59c;font-size:14px;line-height:1.55}
@@ -51,15 +52,20 @@
   .meta{margin-top:12px;color:#797b7f;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
   .gameBody .btn{margin-top:auto;align-self:flex-end;background:var(--coral);color:#251411;box-shadow:0 4px 0 #913a30}
   footer{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line);color:#76777b;font-size:9px;letter-spacing:.08em;text-transform:uppercase;line-height:1.5}
+  footer a{color:#9a9995;text-decoration:none}footer a:hover{color:var(--teal)}
   .modal{position:fixed;inset:0;z-index:20;background:rgba(7,8,9,.86);display:flex;align-items:center;justify-content:center;padding:18px}
   .modalCard{width:min(480px,100%);border:1px solid #575a60;border-radius:8px;background:#25282d;padding:25px;box-shadow:0 30px 70px rgba(0,0,0,.7)}
   .modalHead{display:flex;align-items:center;justify-content:space-between;gap:12px}.modalHead h2{font-family:Georgia,"Times New Roman",serif;font-size:24px;letter-spacing:0}
   .installSteps{margin-top:18px;padding-left:20px;display:grid;gap:11px;color:#c4beb2;font-size:14px;line-height:1.5}
   .installNote{margin-top:16px;color:#8f8d87;font-size:12px;line-height:1.45}
+  .aboutLead{margin-top:16px;color:#d5cfc2;font-family:Georgia,"Times New Roman",serif;font-size:19px;line-height:1.45}
+  .aboutPoints{margin-top:18px;display:grid;gap:14px}.aboutPoint{border-top:1px solid #44484e;padding-top:13px}.aboutPoint strong{display:block;color:var(--teal);font-size:9px;font-weight:900;letter-spacing:.15em;text-transform:uppercase}.aboutPoint p{margin-top:5px;color:#aaa69e;font-size:13px;line-height:1.5}
+  .aboutPromise{margin-top:18px;border-left:3px solid var(--brass);padding:2px 0 2px 13px;color:#c9c1b3;font-size:13px;line-height:1.5}.aboutPromise strong{color:var(--paper)}
+  .modalActions{margin-top:20px;display:flex;justify-content:flex-end;gap:9px;flex-wrap:wrap}
   @media(max-width:900px){.gameGrid{grid-template-columns:1fr}.intro{align-items:flex-start;flex-direction:column}.intro p{max-width:680px}}
   @media(max-width:620px){
     .shell{padding:14px 13px 24px}.brand img{width:42px;height:42px}.brand h1{font-size:20px}.brand p{display:none}.status{display:none}
-    .headerActions .btn{padding:10px 13px}.headerActions .btn span{display:none}.intro{padding:22px 0 17px}.intro h2{font-size:27px}.intro p{font-size:13px}
+    .headerActions .btn{padding:10px 13px}.headerActions .btn span{display:none}.headerActions .btn .infoIcon{display:inline}.intro{padding:22px 0 17px}.intro h2{font-size:27px}.intro p{font-size:13px}
     .gameCard{grid-template-columns:1fr}.gameCard img{height:auto;min-height:0;aspect-ratio:16/10;border-right:0;border-bottom:1px solid var(--line)}.gameBody{min-height:205px}
     footer{align-items:flex-start;flex-direction:column}
   }
@@ -74,6 +80,7 @@
     </a>
     <div class="headerActions">
       <span id="offlineStatus" class="status" hidden></span>
+      <button id="aboutInstallBtn" class="btn quiet aboutInstall" aria-haspopup="dialog"><span class="infoIcon" aria-hidden="true">ⓘ</span><span>What's this?</span></button>
       <button id="installBtn" class="btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg><span>Install</span></button>
     </div>
   </header>
@@ -134,7 +141,7 @@
     </article>
   </main>
 
-  <footer><span>No accounts · no tracking · no ads · no analytics</span><span>Made for gathering, not scrolling</span></footer>
+  <footer><span>No accounts · no tracking · no ads · no analytics</span><span><a href="why-this-exists.html">Why this exists</a> · Made for gathering, not scrolling</span></footer>
 </div>
 
 <div id="installModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="installTitle" hidden>
@@ -146,6 +153,20 @@
       <li>Choose <strong>Add to Home Screen</strong> or <strong>Install App</strong>.</li>
     </ol>
     <p class="installNote">Visit once while online so every game can be cached. Browser storage controls can remove offline files later.</p>
+  </div>
+</div>
+
+<div id="aboutInstallModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="aboutInstallTitle" hidden>
+  <div class="modalCard">
+    <div class="modalHead"><h2 id="aboutInstallTitle">An app, minus the app-store nonsense</h2><button id="closeAboutInstall" class="btn quiet">Close</button></div>
+    <p class="aboutLead">Installing Take Turns saves the whole game collection to your phone. It gets a home-screen icon, opens like an app, and works when the Wi-Fi does not.</p>
+    <div class="aboutPoints">
+      <div class="aboutPoint"><strong>What gets installed?</strong><p>These web pages, the game decks, and their artwork. No mystery software. No account. No notifications begging you to come back.</p></div>
+      <div class="aboutPoint"><strong>Why not the App Store?</strong><p>Because the web can already do this. We would rather make games than negotiate with a storefront so you can download the same games.</p></div>
+      <div class="aboutPoint"><strong>What do you know about me?</strong><p>Delightfully little. There are no ads, trackers, analytics, cookies, or profiles. Saved cards and scores stay in your browser. We cannot monetize your data because we never collect it.</p></div>
+    </div>
+    <p class="aboutPromise"><strong>This is not a funnel.</strong> The games are given away because gathering around something silly is good, and not every enjoyable thing needs a subscription tier. <a href="why-this-exists.html">Read why.</a></p>
+    <div class="modalActions"><button id="aboutInstallHow" class="btn">Okay, show me how</button></div>
   </div>
 </div>
 
@@ -184,7 +205,15 @@ $("installBtn").addEventListener("click",async()=>{
 });
 $("closeInstall").addEventListener("click",()=>{$("installModal").hidden=true;$("installBtn").focus();});
 $("installModal").addEventListener("click",event=>{if(event.target===$("installModal")){$("installModal").hidden=true;$("installBtn").focus();}});
-document.addEventListener("keydown",event=>{if(event.key==="Escape"&&!$("installModal").hidden){$("installModal").hidden=true;$("installBtn").focus();}});
+$("aboutInstallBtn").addEventListener("click",()=>{$("aboutInstallModal").hidden=false;$("closeAboutInstall").focus();});
+$("closeAboutInstall").addEventListener("click",()=>{$("aboutInstallModal").hidden=true;$("aboutInstallBtn").focus();});
+$("aboutInstallModal").addEventListener("click",event=>{if(event.target===$("aboutInstallModal")){$("aboutInstallModal").hidden=true;$("aboutInstallBtn").focus();}});
+$("aboutInstallHow").addEventListener("click",()=>{$("aboutInstallModal").hidden=true;$("installBtn").click();});
+document.addEventListener("keydown",event=>{
+  if(event.key!=="Escape")return;
+  if(!$("aboutInstallModal").hidden){$("aboutInstallModal").hidden=true;$("aboutInstallBtn").focus();return;}
+  if(!$("installModal").hidden){$("installModal").hidden=true;$("installBtn").focus();}
+});
 if(window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone==true)$("installBtn").hidden=true;
 updateNetworkStatus(false);
 })();

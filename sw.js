@@ -1,7 +1,8 @@
-const CACHE_NAME="take-turns-v11";
+const CACHE_NAME="take-turns-v13";
 const ASSETS=[
   "./",
   "./index.html",
+  "./why-this-exists.html",
   "./manifest.webmanifest",
   "./icons/icon.svg",
   "./icons/icon-192.png",
