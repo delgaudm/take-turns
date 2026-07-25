@@ -68,6 +68,24 @@ The phone may:
 - Preserve seen-card history or optional saved cards
 - Explain the rules and guide handoffs
 
+## Navigation Convention
+
+Every game page must provide a consistent route back to the collection:
+
+- A linked brand lockup sits at the upper left and points to `../`, the Take
+  Turns launcher.
+- From left to right, the lockup contains a prominent left arrow, a circular
+  outlined game mark, and two lines of text: the game name in a serif face and
+  a short uppercase tagline.
+- The arrow and game mark use the game's warm accent color. The title uses the
+  primary light text color and the tagline uses a muted text color.
+- Its accessible name is **Back to Take Turns**, and it must have a visible
+  keyboard focus state.
+
+This format is the header template for new games. It keeps navigation
+predictable while leaving room for each game to express its identity through
+the mark, tagline, and palette.
+
 The phone should not:
 
 - Simulate a multiplayer lobby

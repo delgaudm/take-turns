@@ -73,14 +73,14 @@
       <span><h1>Take Turns</h1><p>Games for people in the same place</p></span>
     </a>
     <div class="headerActions">
-      <span id="offlineStatus" class="status">Preparing offline</span>
+      <span id="offlineStatus" class="status" hidden></span>
       <button id="installBtn" class="btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg><span>Install</span></button>
     </div>
   </header>
 
   <section class="intro">
-    <h2>Put the phone down between turns. Pick each other up instead.</h2>
-    <p>Choose a game, hand one phone around, and play together. Once this page is installed or visited online, the whole collection is available without a connection.</p>
+    <h2>Group games that get everyone off their phones. Except this one.</h2>
+    <p>Use one shared phone as the board, deck, timer, or referee. The rest of the game happens in the room.</p>
   </section>
 
   <nav class="filters" aria-label="Filter games">
@@ -164,10 +164,11 @@ document.querySelector(".filters").addEventListener("click",event=>{
 
 function updateNetworkStatus(ready){
   const status=$("offlineStatus");
-  if(!navigator.onLine){status.textContent="Playing offline";status.classList.add("ready");return;}
-  status.textContent=ready?"Ready offline":"Preparing offline";status.classList.toggle("ready",ready);
+  if(!navigator.onLine){status.hidden=false;status.textContent="Offline mode";status.classList.add("ready");return;}
+  if(ready){status.hidden=false;status.textContent="Available offline";status.classList.add("ready");return;}
+  status.hidden=true;status.classList.remove("ready");
 }
-if("serviceWorker" in navigator){
+if("serviceWorker" in navigator&&location.protocol!=="file:"){
   window.addEventListener("load",()=>{
     navigator.serviceWorker.register("./sw.js").then(()=>navigator.serviceWorker.ready).then(()=>updateNetworkStatus(true)).catch(()=>updateNetworkStatus(false));
   });

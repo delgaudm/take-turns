@@ -16,9 +16,9 @@
   html{min-height:100%;background:var(--night)}
   body{min-height:100vh;background:radial-gradient(100% 66% at 50% 0%,var(--night-hi),var(--night) 70%);color:var(--paper);font-family:ui-sans-serif,"Helvetica Neue",Arial,sans-serif;display:flex;flex-direction:column;align-items:center;padding:17px 18px 24px;gap:15px}
   button,input{font:inherit}button{cursor:pointer}[hidden]{display:none!important}
-  button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
   .appHeader{width:min(850px,100%);display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .brand{display:flex;align-items:center;gap:11px;min-width:0}.brandMark{width:43px;height:43px;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-family:Georgia,"Times New Roman",serif;font-size:18px;font-weight:700;flex:0 0 auto}.brandText strong{display:block;font-family:Georgia,"Times New Roman",serif;font-size:23px;line-height:1;letter-spacing:0}.brandText span{display:block;margin-top:5px;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+  .brand{display:flex;align-items:center;gap:11px;min-width:0;color:inherit;text-decoration:none}.brand::before{content:"←";color:var(--gold);font-size:20px}.brandMark{width:43px;height:43px;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-family:Georgia,"Times New Roman",serif;font-size:18px;font-weight:700;flex:0 0 auto}.brandText strong{display:block;font-family:Georgia,"Times New Roman",serif;font-size:23px;line-height:1;letter-spacing:0}.brandText span{display:block;margin-top:5px;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
   .headerTools{display:flex;gap:8px;flex:0 0 auto}.toolButton{height:40px;min-width:40px;border:1px solid #555a60;border-radius:999px;background:transparent;color:#bbb7ae;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 11px;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.toolButton svg{width:16px;height:16px}.toolButton:hover{border-color:#777d84;color:var(--paper)}
   main{width:min(850px,100%);display:grid;gap:13px}.deckMeta{display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--muted);font:800 9px ui-monospace,Menlo,monospace;letter-spacing:.13em;text-transform:uppercase}.badge{border:1px solid rgba(222,183,91,.45);border-radius:999px;padding:5px 8px;color:#e8cb85}
   .decisionBoard{position:relative;border:1px solid var(--line);border-radius:8px;background:#1e2226;padding:16px;box-shadow:0 22px 48px rgba(0,0,0,.35)}
@@ -37,7 +37,7 @@
 </head>
 <body>
 <header class="appHeader">
-  <div class="brand"><span class="brandMark" aria-hidden="true">A/B</span><span class="brandText"><strong>Would You Rather?</strong><span>Two choices. No escape hatch.</span></span></div>
+  <a class="brand" href="../" aria-label="Back to Take Turns"><span class="brandMark" aria-hidden="true">A/B</span><span class="brandText"><strong>Would You Rather?</strong><span>Two choices. No escape hatch.</span></span></a>
   <div class="headerTools">
     <button id="savedBtn" class="toolButton" aria-label="Open saved dilemmas" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg><span class="toolLabel">Saved</span><span id="savedCount">0</span></button>
     <button id="settingsBtn" class="toolButton" aria-label="Deck settings" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3"/><path d="M1 14h6M9 8h6M17 16h6"/></svg></button>

@@ -19,11 +19,12 @@
     display:flex;flex-direction:column;align-items:center;gap:18px;padding:18px 18px 24px;
   }
   button,input{font:inherit}button{cursor:pointer}button:disabled{opacity:.38;cursor:default}
-  button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--aqua);outline-offset:3px}
+  button:focus-visible,input:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--aqua);outline-offset:3px}
   [hidden]{display:none!important}
 
   .appHeader{width:min(740px,100%);display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .brand{display:flex;align-items:center;gap:11px;min-width:0;color:var(--cream)}
+  .brand{display:flex;align-items:center;gap:11px;min-width:0;color:var(--cream);text-decoration:none}
+  .brand::before{content:"←";color:var(--mustard);font-size:20px}
   .brandMark{width:42px;height:42px;flex:0 0 auto;border:2px solid var(--aqua);border-radius:50%;display:grid;place-items:center;color:var(--aqua);box-shadow:inset 0 0 0 3px var(--night),inset 0 0 0 4px rgba(99,192,187,.35)}
   .brandMark svg{width:21px;height:21px}
   .brandText{min-width:0}
@@ -101,10 +102,10 @@
 <body>
 
 <header class="appHeader">
-  <div class="brand">
+  <a class="brand" href="../" aria-label="Back to Take Turns">
     <span class="brandMark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/><path d="M8 8h8M8 12h5"/></svg></span>
     <span class="brandText"><strong>Talk Amongst Yourselves</strong><span>Skip the small talk</span></span>
-  </div>
+  </a>
   <div class="headerTools">
     <button id="savedBtn" class="toolButton wide" aria-label="Open saved cards" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg><span class="toolLabel">Saved</span><span id="savedCount">0</span></button>
     <button id="settingsBtn" class="toolButton" aria-label="Deck settings" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3"/><path d="M1 14h6M9 8h6M17 16h6"/></svg></button>

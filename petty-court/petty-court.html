@@ -20,12 +20,13 @@
   }
   button,input{font:inherit}
   button{cursor:pointer}
-  button:focus-visible,input:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+  button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
   button:disabled{opacity:.38;cursor:default}
   [hidden]{display:none!important}
 
   .appHeader{width:min(720px,100%);display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .brand{display:flex;align-items:center;gap:10px;color:var(--paper)}
+  .brand{display:flex;align-items:center;gap:10px;color:var(--paper);text-decoration:none}
+  .brand::before{content:"←";color:var(--brass);font-size:20px}
   .seal{
     width:42px;height:42px;border:2px solid var(--brass);border-radius:50%;display:grid;place-items:center;
     color:var(--brass);box-shadow:inset 0 0 0 3px var(--night),inset 0 0 0 4px rgba(209,169,79,.4)
@@ -160,14 +161,14 @@
 <body>
 
 <header class="appHeader">
-  <div class="brand">
+  <a class="brand" href="../" aria-label="Back to Take Turns">
     <span class="seal" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
         <path d="m14 13-7.5 7.5a2.1 2.1 0 0 1-3-3L11 10"/><path d="m16 16 6-6"/><path d="m8 8 6-6"/><path d="m9 7 8 8"/><path d="m21 11-8-8"/>
       </svg>
     </span>
     <span class="brandText"><strong>Petty Court</strong><span>Trivial matters. Serious arguments.</span></span>
-  </div>
+  </a>
   <div class="headerTools">
     <button id="caseLawBtn" class="btn quiet iconText" aria-haspopup="dialog" aria-label="Open Case Law">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h9l4 4v16H6z"/><path d="M14 2v5h5"/><path d="M9 13h6M9 17h6"/></svg>

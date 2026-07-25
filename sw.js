@@ -1,4 +1,4 @@
-const CACHE_NAME="take-turns-v7";
+const CACHE_NAME="take-turns-v11";
 const ASSETS=[
   "./",
   "./index.html",
