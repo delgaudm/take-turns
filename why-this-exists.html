@@ -38,9 +38,10 @@
   .closing{padding:55px 0 8px;text-align:center}
   .closing p{margin:auto;color:var(--paper);font:clamp(28px,5vw,43px)/1.15 Georgia,"Times New Roman",serif}
   .closing strong{display:block;margin-top:10px;color:var(--gold)}
-  footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:18px;color:#74767a;font-size:9px;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
-  footer a{text-decoration:none;color:#9a9995}footer a:hover{color:var(--teal)}
-  @media(max-width:620px){.shell{padding:15px 16px 42px}.brandText span{display:none}.brandText strong{font-size:19px}.brandMark{width:38px;height:38px}.hero{padding:54px 0 38px}.dek{font-size:17px}.principles{grid-template-columns:1fr}section{padding:34px 0}section h2{font-size:27px}footer{align-items:flex-start;flex-direction:column}}
+  .playButton{display:inline-flex;align-items:center;justify-content:center;margin-top:31px;border-radius:999px;padding:14px 23px;background:var(--gold);color:#211a0e;text-decoration:none;font-size:10px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;box-shadow:0 5px 0 #8d6d28}
+  .playButton:active{transform:translateY(3px);box-shadow:0 2px 0 #8d6d28}
+  footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);text-align:center;color:#74767a;font-size:9px;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
+  @media(max-width:620px){.shell{padding:15px 16px 42px}.brandText span{display:none}.brandText strong{font-size:19px}.brandMark{width:38px;height:38px}.hero{padding:54px 0 38px}.dek{font-size:17px}.principles{grid-template-columns:1fr}section{padding:34px 0}section h2{font-size:27px}.playButton{width:100%}}
 </style>
 </head>
 <body>
@@ -104,9 +105,9 @@
     </section>
   </main>
 
-  <div class="closing"><p>The phone gets one turn.<strong>Then it’s yours.</strong></p></div>
+  <div class="closing"><p>The phone gets one turn.<strong>Then it’s yours.</strong></p><a class="playButton" href="./">Go play. Take turns. Have fun.</a></div>
 
-  <footer><span>No accounts · no tracking · no ads · no analytics</span><a href="./">Go play something</a></footer>
+  <footer>No accounts · no tracking · no ads · no analytics</footer>
 </div>
 </body>
 </html>
